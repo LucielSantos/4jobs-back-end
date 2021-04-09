@@ -7,7 +7,7 @@ const app = express()
 app.use(cors())
 
 app.get('/', (req, res) => {
-  return res.json({ message: 'Hello world finish' })
+  return res.json({ message: 'Hello world' })
 })
 
 app.listen(process.env.PORT || 3333)
