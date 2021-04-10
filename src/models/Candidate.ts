@@ -3,31 +3,31 @@ import { v4 as uuid } from 'uuid'
 
 @Entity('candidates')
 class Candidate {
-  @PrimaryColumn()
+  @PrimaryColumn('varchar')
   readonly id: string;
 
-  @Column()
+  @Column('varchar')
   name: string;
 
-  @Column()
+  @Column('varchar')
   password: string;
 
-  @Column()
+  @Column('varchar')
   description: string;
 
-  @Column()
+  @Column('varchar')
   about: string;
 
-  @Column()
+  @Column('varchar')
   locality: string;
 
-  @Column()
+  @Column('varchar')
   skills: string;
 
-  @Column()
+  @Column('varchar')
   formations: string;
 
-  @Column()
+  @Column('varchar')
   experiences: string;
 
   @CreateDateColumn()
