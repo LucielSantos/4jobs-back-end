@@ -17,5 +17,6 @@ module.exports = {
         '@controllers': './src/controllers',
       },
     }],
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
   ],
 }
