@@ -15,5 +15,10 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "space-before-function-paren": "off",
+        "comma-dangle": [
+            "error",
+            "always-multiline"
+        ]
     }
 }

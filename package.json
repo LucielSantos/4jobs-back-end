@@ -8,7 +8,8 @@
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.14",
@@ -32,6 +33,9 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.32"
   }
 }
