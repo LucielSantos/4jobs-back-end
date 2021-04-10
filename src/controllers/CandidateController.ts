@@ -1,12 +1,18 @@
+import { Candidate } from '@src/models/Candidate'
 import { Request, Response } from 'express'
+import { getRepository } from 'typeorm'
 
 class CandidateController {
-  create(req: Request, res: Response) {
-    const body = req.body
+  async create(req: Request, res: Response) {
+    const { name, password, description, about, locality, skills, formations, experiences } = req.body
 
-    console.log(body)
+    const candidateRepository = getRepository(Candidate)
 
-    return res.send().status(200)
+    const candidate = candidateRepository.create({ name, password, description, about, locality, skills, formations, experiences })
+
+    await candidateRepository.save(candidate)
+
+    return res.json(candidate).status(201)
   }
 }
 
