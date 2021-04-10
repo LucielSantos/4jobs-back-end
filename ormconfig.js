@@ -6,10 +6,10 @@ module.exports = {
   password: process.env.DB_PASS || 'root',
   database: process.env.DB_NAME || '4jobs-dev',
   entities: [
-    `./src/models/**.${process.env.ENVIRONMENT === 'homolog' ? 'js' : 'ts'}`,
+    `./src/models/**.${process.env.DB_HOST === 'homolog' ? 'js' : 'ts'}`,
   ],
   migrations: [
-    `./src/database/migrations/**.${process.env.ENVIRONMENT === 'homolog' ? 'js' : 'ts'}`,
+    `./src/database/migrations/**.${process.env.DB_HOST === 'homolog' ? 'js' : 'ts'}`,
   ],
   cli: {
     migrationsDir: './src/database/migrations',
