@@ -17,6 +17,7 @@ module.exports = {
         '@controllers': './src/controllers',
       },
     }],
+    'babel-plugin-transform-typescript-metadata',
     ['@babel/plugin-proposal-decorators', { legacy: true }],
   ],
 }
