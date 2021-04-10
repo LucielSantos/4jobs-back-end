@@ -1,3 +1,3 @@
-1run_migrations: yarn typeorm migrations:run
-2build: yarn build
-3web: yarn start
+run_migrations: yarn typeorm migrations:run
+build: yarn build
+web: yarn start
