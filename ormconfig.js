@@ -9,7 +9,7 @@ module.exports = {
     ? ['./dist/models/**.js']
     : ['./src/models/**.ts'],
   migrations: process.env.ENVIRONMENT === 'homolog'
-    ? ['./src/database/migrations/**.js']
+    ? ['./dist/database/migrations/**.js']
     : ['./src/database/migrations/**.ts'],
   cli: {
     migrationsDir: './src/database/migrations',
