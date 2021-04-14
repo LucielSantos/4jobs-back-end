@@ -1,4 +1,4 @@
-import { Candidate } from '@src/models/Candidate'
+import { Candidate } from '@models/Candidate'
 import { Request, Response } from 'express'
 import { getRepository } from 'typeorm'
 

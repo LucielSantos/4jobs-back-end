@@ -1,4 +1,5 @@
-import { CandidateController, CompanyController } from '@controllers/'
+import { CandidateController } from '@controllers/CandidateController'
+import { CompanyController } from '@controllers/CompanyController'
 import { Router } from 'express'
 
 const router = Router()

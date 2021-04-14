@@ -68,11 +68,11 @@
     "forceConsistentCasingInFileNames": true, /* Disallow inconsistently-cased references to the same file. */
     "baseUrl": ".",
     "paths": {
-      "@src*": [
-        "./src*"
-      ],
       "@controllers*": [
         "./src/controllers*"
+      ],
+      "@models*": [
+        "./src/models*"
       ],
     }
   }

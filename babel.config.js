@@ -13,8 +13,8 @@ module.exports = {
   plugins: [
     ['module-resolver', {
       alias: {
-        '@src': './src',
         '@controllers': './src/controllers',
+        '@models': './src/models',
       },
     }],
     'babel-plugin-transform-typescript-metadata',
