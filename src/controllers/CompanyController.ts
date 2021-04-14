@@ -1,6 +1,6 @@
+import { CompaniesRepository } from '@repositories/CompaniesRepository'
+import { createErrorMessage } from '@utils/errors'
 import { Request, Response } from 'express'
-import { CompaniesRepository } from 'src/repositories/CompaniesRepository'
-import { createErrorMessage } from 'src/utils/errors'
 import { getCustomRepository } from 'typeorm'
 
 class CompanyController {

@@ -4,7 +4,6 @@ import express from 'express'
 import cors from 'cors'
 import './database'
 import { router } from './routes'
-import { errorMiddleware } from './utils/errorMiddleware'
 
 const app = express()
 

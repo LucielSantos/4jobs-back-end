@@ -74,6 +74,12 @@
       "@models*": [
         "./src/models*"
       ],
+      "@repositories*": [
+        "./src/repositories*"
+      ],
+      "@utils*": [
+        "./src/utils*"
+      ]
     }
   }
 }

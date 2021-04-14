@@ -15,6 +15,8 @@ module.exports = {
       alias: {
         '@controllers': './src/controllers',
         '@models': './src/models',
+        '@repositories': './src/repositories',
+        '@utils': './src/utils',
       },
     }],
     'babel-plugin-transform-typescript-metadata',
