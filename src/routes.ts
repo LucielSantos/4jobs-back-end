@@ -1,6 +1,6 @@
 import { CandidateController } from '@controllers/CandidateController'
 import { CompanyController } from '@controllers/CompanyController'
-import { ErrorRequestHandler, NextFunction, Request, Response, Router } from 'express'
+import { Router } from 'express'
 import { errorMiddleware } from './utils/errorMiddleware'
 
 const router = Router()

@@ -1,21 +1,33 @@
 import { CompaniesRepository } from '@repositories/CompaniesRepository'
 import { createErrorMessage } from '@utils/errors'
 import { Request, Response } from 'express'
-import { getCustomRepository } from 'typeorm'
+import { ICreateCompany } from 'src/dtos/company'
+import { createCompanyValidationSchema } from 'src/validationSchemas'
+import { BaseController } from './BaseController'
 
-class CompanyController {
+class CompanyController extends BaseController<CompaniesRepository> {
+  constructor() {
+    super(createCompanyValidationSchema, CompaniesRepository)
+  }
+
   async create(req: Request, res: Response) {
-    const { name, responsible, description, marketSegment, cnpj, state, city, email, phone, password, profileImage } = req.body
+    const data: ICreateCompany = req.body
 
-    const companyRepository = getCustomRepository(CompaniesRepository)
+    const success = await this.executeCreateValidation(data, res)
 
-    if (await companyRepository.verifyIfExists(name, email)) {
+    if (await this.getRepository().verifyIfExists(data.name, data.email)) {
       return res.status(400).json(createErrorMessage({ toastMessage: 'Uma empresa com este nome e email já existe' }))
     }
 
-    const company = companyRepository.create({ name, responsible, description, marketSegment, cnpj, state, city, email, phone, password, profileImage })
+    if (success) {
+      this.executeCreation(data, res)
+    }
+  }
 
-    await companyRepository.save(company)
+  async executeCreation(data: ICreateCompany, res: Response) {
+    const company = this.getRepository().create(data)
+
+    await this.getRepository().save(company)
 
     return res.json(company).status(201)
   }
