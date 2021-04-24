@@ -19,13 +19,7 @@ router.post('/candidate', async (req, res, next) => {
 })
 
 // Company routes
-router.post('/company', async (req, res, next) => {
-  try {
-    await companyController.create(req, res)
-  } catch (error) {
-    next(error)
-  }
-})
+router.post('/company', (req, res) => companyController.create(req, res))
 
 router.use(errorMiddleware)
 

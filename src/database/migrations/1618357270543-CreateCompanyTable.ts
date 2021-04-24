@@ -54,7 +54,7 @@ export class CreateCompanyTable1618357270543 implements MigrationInterface {
           },
           {
             name: 'profileImage',
-            type: 'varchar',
+            type: 'longblob',
           },
           {
             name: 'created_at',
