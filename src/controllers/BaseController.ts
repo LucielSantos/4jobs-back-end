@@ -45,7 +45,15 @@ class BaseController<T> implements IBaseController<T> {
           }
         })
 
-        res.status(400).json(createErrorMessage({ toastMessage: 'Hove erros de validação', formErrors: errorMessages })).send()
+        res
+          .status(400)
+          .json(
+            createErrorMessage({
+              toastMessage: 'Hove erros de validação',
+              formErrors: errorMessages,
+              isFormError: true,
+            }))
+          .send()
 
         return false
       }
