@@ -7,6 +7,9 @@ class Candidate {
   readonly id: string;
 
   @Column('varchar')
+  email: string;
+
+  @Column('varchar')
   name: string;
 
   @Column('varchar')

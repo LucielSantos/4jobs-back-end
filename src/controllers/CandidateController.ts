@@ -1,18 +1,37 @@
 import { Candidate } from '@models/Candidate'
+import { CandidateRepository } from '@repositories/CandidateRepository'
+import { createErrorMessage } from '@utils/errors'
 import { Request, Response } from 'express'
+import { ICreateCandidate } from 'src/dtos/candidate'
+import { createCandidateValidationSchema } from 'src/validationSchemas'
 import { getRepository } from 'typeorm'
+import { BaseController } from './BaseController'
 
-class CandidateController {
+class CandidateController extends BaseController<CandidateRepository> {
+  constructor() {
+    super(createCandidateValidationSchema, CandidateRepository)
+  }
+
   async create(req: Request, res: Response) {
-    const { name, password, description, about, locality, skills, formations, experiences } = req.body
+    const data: ICreateCandidate = req.body
 
-    const candidateRepository = getRepository(Candidate)
+    const successValidation = await this.executeCreateValidation(data, res)
 
-    const candidate = candidateRepository.create({ name, password, description, about, locality, skills, formations, experiences })
+    if (await this.getRepository().verifyIfExists(data.name, data.email)) {
+      return res.status(400).json(createErrorMessage({ toastMessage: 'Já existe candidato com este nome e email', isFormError: false }))
+    }
 
-    await candidateRepository.save(candidate)
+    if (successValidation) {
+      this.executeCreation(data, res)
+    }
+  }
 
-    return res.json(candidate).status(201)
+  async executeCreation(data: ICreateCandidate, res: Response) {
+    const company = this.getRepository().create(data)
+
+    await this.getRepository().save(company)
+
+    return res.json(company).status(201)
   }
 }
 

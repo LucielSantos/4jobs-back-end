@@ -13,6 +13,10 @@ export class CreateCandidate1618027510250 implements MigrationInterface {
             generationStrategy: 'uuid',
           },
           {
+            name: 'email',
+            type: 'varchar',
+          },
+          {
             name: 'name',
             type: 'varchar',
           },
@@ -23,26 +27,32 @@ export class CreateCandidate1618027510250 implements MigrationInterface {
           {
             name: 'description',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'about',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'locality',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'skills',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'formations',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'experiences',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'created_at',

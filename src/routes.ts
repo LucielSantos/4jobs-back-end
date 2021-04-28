@@ -10,13 +10,7 @@ const candidateController = new CandidateController()
 const companyController = new CompanyController()
 
 // Candidate routes
-router.post('/candidate', async (req, res, next) => {
-  try {
-    await candidateController.create(req, res)
-  } catch (error) {
-    next(error)
-  }
-})
+router.post('/candidate', (req, res) => candidateController.create(req, res))
 
 // Company routes
 router.post('/company', (req, res) => companyController.create(req, res))
