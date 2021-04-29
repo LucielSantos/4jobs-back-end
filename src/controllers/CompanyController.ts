@@ -16,7 +16,7 @@ class CompanyController extends BaseController<CompaniesRepository> {
     const success = await this.executeCreateValidation(data, res)
 
     if (await this.getRepository().verifyIfExists(data.name, data.email)) {
-      return res.status(400).json(createErrorMessage({ toastMessage: 'Uma empresa com este nome e email já existe', isFormError: false }))
+      return res.status(400).json(createErrorMessage({ toastMessage: 'Uma empresa com este nome ou email já existe', isFormError: false }))
     }
 
     if (success) {

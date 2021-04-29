@@ -18,7 +18,7 @@ class CandidateController extends BaseController<CandidateRepository> {
     const successValidation = await this.executeCreateValidation(data, res)
 
     if (await this.getRepository().verifyIfExists(data.name, data.email)) {
-      return res.status(400).json(createErrorMessage({ toastMessage: 'Já existe candidato com este nome e email', isFormError: false }))
+      return res.status(400).json(createErrorMessage({ toastMessage: 'Já existe candidato com este nome ou email', isFormError: false }))
     }
 
     if (successValidation) {
