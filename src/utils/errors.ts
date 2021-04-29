@@ -1,9 +1,9 @@
 interface createErrorMessageInterface {
   toastMessage?: string,
   formErrors?: any,
-  isFormError: boolean,
+  isFormError?: boolean,
 }
 
-export const createErrorMessage = (error: createErrorMessageInterface) => {
-  return error
+export const createErrorMessage = ({ isFormError = false, ...rest }: createErrorMessageInterface) => {
+  return { isFormError, ...rest }
 }

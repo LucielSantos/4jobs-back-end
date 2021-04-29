@@ -1,7 +1,9 @@
+import { Router } from 'express'
+
 import { AuthController } from '@controllers/AuthController'
 import { CandidateController } from '@controllers/CandidateController'
 import { CompanyController } from '@controllers/CompanyController'
-import { Router } from 'express'
+import { authMiddleware } from './middlewares/auth'
 import { errorMiddleware } from './utils/errorMiddleware'
 
 const router = Router()
@@ -13,7 +15,7 @@ const companyController = new CompanyController()
 const authController = new AuthController()
 
 // Candidate routes
-router.post('/candidate', (req, res) => candidateController.create(req, res))
+router.post('/candidate', authMiddleware, (req, res) => candidateController.create(req, res))
 
 // Company routes
 router.post('/company', (req, res) => companyController.create(req, res))
