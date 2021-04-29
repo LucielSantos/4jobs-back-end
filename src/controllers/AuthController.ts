@@ -8,7 +8,7 @@ import { CompanyController } from './CompanyController'
 import authConfig from '../config/auth.json'
 import { expiresTokenIn } from 'src/constants'
 import { userType } from 'src/constants/user'
-import { generateToken } from '@utils/'
+import { convertBlobColumnToBase64, generateToken } from '@utils/'
 
 class AuthController {
   async authenticate(req: Request, res: Response) {
@@ -31,7 +31,6 @@ class AuthController {
       const company = await companyController
         .getRepository()
         .findOne({
-          select: ['name', 'email', 'id'],
           where: [
             { name: data.login, password: data.password },
             { email: data.login, password: data.password },
@@ -42,7 +41,7 @@ class AuthController {
 
       const token = generateToken(company.id)
 
-      return res.json({ token, user: { ...company, userType: userType.company } }).status(200)
+      return res.json({ token, user: { ...company, profileImage: convertBlobColumnToBase64(company.profileImage), userType: userType.company } }).status(200)
     }
 
     const token = generateToken(candidate.id)
