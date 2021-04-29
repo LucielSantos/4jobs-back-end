@@ -15,7 +15,7 @@ const companyController = new CompanyController()
 const authController = new AuthController()
 
 // Candidate routes
-router.post('/candidate', authMiddleware, (req, res) => candidateController.create(req, res))
+router.post('/candidate', (req, res) => candidateController.create(req, res))
 
 // Company routes
 router.post('/company', (req, res) => companyController.create(req, res))
