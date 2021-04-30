@@ -41,12 +41,21 @@ class AuthController {
 
       const token = generateToken(company.id)
 
-      return res.json({ token, user: { ...company, profileImage: convertBlobColumnToBase64(company.profileImage), userType: userType.company } }).status(200)
+      return res
+        .json({
+          token,
+          userType: userType.company,
+          user: {
+            ...company,
+            profileImage: convertBlobColumnToBase64(company.profileImage),
+          },
+        })
+        .status(200)
     }
 
     const token = generateToken(candidate.id)
 
-    return res.json({ token, user: { ...candidate, userType: userType.candidate } }).status(200)
+    return res.json({ token, userType: userType.candidate, user: { ...candidate } }).status(200)
   }
 }
 
