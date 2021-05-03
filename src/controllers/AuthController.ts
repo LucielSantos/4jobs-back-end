@@ -45,10 +45,7 @@ class AuthController {
         .json({
           token,
           userType: userType.company,
-          user: {
-            ...company,
-            profileImage: convertBlobColumnToBase64(company.profileImage),
-          },
+          user: company,
         })
         .status(200)
     }

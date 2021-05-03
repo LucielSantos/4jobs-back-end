@@ -36,7 +36,7 @@ class Company {
   @Column('varchar')
   password: string
 
-  @Column('varchar')
+  @Column('mediumtext')
   profileImage: string
 
   @CreateDateColumn()
