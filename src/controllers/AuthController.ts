@@ -5,10 +5,8 @@ import { IAuthenticate } from 'src/dtos/auth'
 import { CandidateController } from './CandidateController'
 import { CompanyController } from './CompanyController'
 
-import authConfig from '../config/auth.json'
-import { expiresTokenIn } from 'src/constants'
 import { userType } from 'src/constants/user'
-import { convertBlobColumnToBase64, generateToken } from '@utils/'
+import { generateToken } from '@utils/'
 
 class AuthController {
   async authenticate(req: Request, res: Response) {
