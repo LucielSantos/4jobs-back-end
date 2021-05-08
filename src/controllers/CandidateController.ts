@@ -17,7 +17,7 @@ class CandidateController extends BaseController<CandidateRepository> {
 
     const successValidation = await this.executeCreateValidation(data, res)
 
-    if (await this.getRepository().verifyIfExists(data.name, data.email)) {
+    if (await this.repository.verifyIfExists(data.name, data.email)) {
       return res.status(400).json(createErrorMessage({ toastMessage: 'Já existe candidato com este nome ou email', isFormError: false }))
     }
 
@@ -27,11 +27,11 @@ class CandidateController extends BaseController<CandidateRepository> {
   }
 
   async executeCreation(data: ICreateCandidate, res: Response) {
-    const company = this.getRepository().create(data)
+    const company = this.repository.create(data)
 
-    await this.getRepository().save(company)
+    await this.repository.save(company)
 
-    return res.json(company).status(201)
+    return res.status(201).json(company)
   }
 }
 

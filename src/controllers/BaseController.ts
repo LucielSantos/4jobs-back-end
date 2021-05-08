@@ -7,7 +7,7 @@ type TValidationSchema = Yup.AnyObjectSchema;
 
 interface IBaseController<T> {
   createValidationSchema: TValidationSchema;
-  repository: ObjectType<T>;
+  modelRepository: ObjectType<T>;
 }
 
 interface IValidationDataObj { [key: string]: any; }
@@ -16,15 +16,15 @@ interface IErrorMessages { [key: string]: any; }
 
 class BaseController<T> implements IBaseController<T> {
   createValidationSchema: TValidationSchema;
-  repository: ObjectType<T>;
+  modelRepository: ObjectType<T>;
 
   constructor(createValidationSchema: TValidationSchema, repository: ObjectType<T>) {
     this.createValidationSchema = createValidationSchema
-    this.repository = repository
+    this.modelRepository = repository
   }
 
-  getRepository() {
-    return getCustomRepository(this.repository)
+  get repository() {
+    return getCustomRepository(this.modelRepository)
   }
 
   async executeCreateValidation(data: IValidationDataObj, res: Response): Promise<boolean> {

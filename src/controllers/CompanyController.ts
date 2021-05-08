@@ -15,7 +15,7 @@ class CompanyController extends BaseController<CompaniesRepository> {
 
     const success = await this.executeCreateValidation(data, res)
 
-    if (await this.getRepository().verifyIfExists(data.name, data.email)) {
+    if (await this.repository.verifyIfExists(data.name, data.email)) {
       return res.status(400).json(createErrorMessage({ toastMessage: 'Uma empresa com este nome ou email já existe', isFormError: false }))
     }
 
@@ -25,11 +25,11 @@ class CompanyController extends BaseController<CompaniesRepository> {
   }
 
   async executeCreation(data: ICreateCompany, res: Response) {
-    const company = this.getRepository().create(data)
+    const company = this.repository.create(data)
 
-    await this.getRepository().save(company)
+    await this.repository.save(company)
 
-    return res.json(company).status(201)
+    return res.status(201).json(company)
   }
 }
 

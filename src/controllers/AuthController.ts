@@ -15,7 +15,7 @@ class AuthController {
     const candidateController = new CandidateController()
 
     const candidate = await candidateController
-      .getRepository()
+      .repository
       .findOne({
         where: [
           { email: data.login, password: data.password },
@@ -27,7 +27,7 @@ class AuthController {
       const companyController = new CompanyController()
 
       const company = await companyController
-        .getRepository()
+        .repository
         .findOne({
           where: [
             { name: data.login, password: data.password },
@@ -37,7 +37,7 @@ class AuthController {
 
       if (!company) { return res.status(400).send(createErrorMessage({ toastMessage: 'Usuário ou senha incorretos', isFormError: false })) }
 
-      const token = generateToken(company.id)
+      const token = generateToken(company.id, userType.company)
 
       return res
         .json({
@@ -48,7 +48,7 @@ class AuthController {
         .status(200)
     }
 
-    const token = generateToken(candidate.id)
+    const token = generateToken(candidate.id, userType.candidate)
 
     return res.json({ token, userType: userType.candidate, user: { ...candidate } }).status(200)
   }
