@@ -28,7 +28,7 @@ router.post('/candidate', (req, res) => candidateController.create(req, res))
 router.post('/company', (req, res) => companyController.create(req, res))
 
 // Job routes
-router.post('/job', authMiddleware(userType.company), (req, res) => jobController.create(req, res))
+router.post('/jobs', authMiddleware(userType.company), (req, res) => jobController.create(req, res))
 
 router.get('/jobs', authMiddleware(userType.company), (req, res) => jobController.getJobs(req, res))
 
