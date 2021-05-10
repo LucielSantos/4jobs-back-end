@@ -40,6 +40,20 @@ class JobController extends BaseController<JobRepository> {
 
     return res.status(201).json(job)
   }
+
+  async getJobs(req: Request, res: Response) {
+    const companyId = res.locals.userId as string
+
+    const jobs = await this.repository
+      .find({
+        where: {
+          companyId,
+        },
+        select: ['created_at', 'deadlineResolve', 'description', 'id', 'title', 'tags'],
+      })
+
+    return res.status(200).json(jobs)
+  }
 }
 
 export { JobController }
