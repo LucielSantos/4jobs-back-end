@@ -50,6 +50,9 @@ class JobController extends BaseController<JobRepository> {
           companyId,
         },
         select: ['created_at', 'deadlineResolve', 'description', 'id', 'title', 'tags'],
+        order: {
+          created_at: 'ASC',
+        },
       })
 
     return res.status(200).json(jobs)
