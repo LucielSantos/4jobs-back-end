@@ -49,7 +49,7 @@ class JobController extends BaseController<JobRepository> {
         where: {
           companyId,
         },
-        select: ['created_at', 'deadlineResolve', 'description', 'id', 'title', 'tags'],
+        select: ['created_at', 'deadlineResolve', 'description', 'id', 'title', 'tags', 'observations'],
         order: {
           created_at: 'ASC',
         },
