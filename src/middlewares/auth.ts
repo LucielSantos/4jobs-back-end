@@ -6,7 +6,8 @@ import authConfig from '../config/auth.json'
 
 import { NextFunction, Request, Response } from 'express'
 
-export const authMiddleware = (userType: TUserTypeNum) => (req: Request, res: Response, next: NextFunction) => {
+/** If false, not consider user type, only if is logged */
+export const authMiddleware = (userType: TUserTypeNum | false) => (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization
 
   if (!authHeader) { return res.status(401).send(createErrorMessage({ toastMessage: 'Usuário não pode executar esta ação' })) }
@@ -20,7 +21,9 @@ export const authMiddleware = (userType: TUserTypeNum) => (req: Request, res: Re
   if (!/^Bearer$/i.test(scheme)) { return res.status(401).send(createErrorMessage({ toastMessage: 'Token error: not contains "Bearer"' })) }
 
   jwt.verify(token, authConfig.secret, (error, decoded: ITokenPayload) => {
-    if (error || decoded.userType !== userType) { return res.status(401).send(createErrorMessage({ toastMessage: 'Usuário não pode executar esta ação' })) }
+    if (error) { return res.status(401).send(createErrorMessage({ toastMessage: 'Usuário não pode executar esta ação' })) }
+
+    if (userType && decoded.userType !== userType) { return res.status(401).send(createErrorMessage({ toastMessage: 'Usuário não pode executar esta ação' })) }
 
     res.locals.userId = decoded.id
 

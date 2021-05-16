@@ -57,6 +57,20 @@ class JobController extends BaseController<JobRepository> {
 
     return res.status(200).json(jobs)
   }
+
+  async getPreview(req: Request<{ jobId: string }>, res: Response) {
+    const { jobId } = req.params
+
+    const job = await this.repository.getPreview(jobId)
+
+    if (!job) {
+      return res.status(404).json(createErrorMessage({ toastMessage: 'Vaga não encontrada' }))
+    }
+
+    console.log(job)
+
+    return res.status(200).json(job)
+  }
 }
 
 export { JobController }

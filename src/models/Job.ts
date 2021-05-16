@@ -1,6 +1,7 @@
-import { uuid } from '@utils/'
+import { v4 as uuid } from 'uuid'
 import { IDynamicFormField } from 'src/dtos/job'
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryColumn } from 'typeorm'
+import { Company } from './Company'
 
 @Entity('jobs')
 class Job {
@@ -9,6 +10,10 @@ class Job {
 
   @Column('varchar')
   companyId: string;
+
+  @ManyToOne(() => Company, company => company.name)
+  @JoinColumn({ name: 'companyId' })
+  company: Company
 
   @Column('varchar')
   title: string;

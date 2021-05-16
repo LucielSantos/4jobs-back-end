@@ -6,6 +6,25 @@ class JobRepository extends Repository<Job> {
   async verifyIfExists(title: string, companyId: string) {
     return Boolean(await this.findOne({ title, companyId }))
   }
+
+  async getPreview(jobId: string) {
+    return await this
+      .createQueryBuilder('jobs')
+      .select([
+        'jobs.title',
+        'jobs.deadlineResolve',
+        'jobs.description',
+        'jobs.expectedResolution',
+        'jobs.observations',
+        'jobs.tags',
+        'jobs.title',
+        'companies.name',
+        'companies.marketSegment',
+      ])
+      .where({ id: jobId })
+      .leftJoin('jobs.company', 'companies')
+      .getOne()
+  }
 }
 
 export { JobRepository }
