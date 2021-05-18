@@ -25,6 +25,10 @@ class JobRepository extends Repository<Job> {
       .leftJoin('jobs.company', 'companies')
       .getOne()
   }
+
+  async verifyIfJobExistsByCompany(jobId: string, companyId: string) {
+    return Boolean(await this.findOne({ id: jobId, companyId }))
+  }
 }
 
 export { JobRepository }

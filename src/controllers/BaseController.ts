@@ -18,8 +18,11 @@ class BaseController<T> implements IBaseController<T> {
   createValidationSchema: TValidationSchema;
   modelRepository: ObjectType<T>;
 
-  constructor(createValidationSchema: TValidationSchema, repository: ObjectType<T>) {
-    this.createValidationSchema = createValidationSchema
+  constructor(createValidationSchema: TValidationSchema | false, repository: ObjectType<T>) {
+    if (createValidationSchema) {
+      this.createValidationSchema = createValidationSchema
+    }
+
     this.modelRepository = repository
   }
 

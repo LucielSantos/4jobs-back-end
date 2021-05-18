@@ -67,8 +67,6 @@ class JobController extends BaseController<JobRepository> {
       return res.status(404).json(createErrorMessage({ toastMessage: 'Vaga não encontrada' }))
     }
 
-    console.log(job)
-
     return res.status(200).json(job)
   }
 }
