@@ -35,6 +35,11 @@ export class CreateJobResponseTable1621199217378 implements MigrationInterface {
             type: 'integer',
             default: jobResponseTypes.registered,
           },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
         ],
         foreignKeys: [
           {

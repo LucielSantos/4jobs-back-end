@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid'
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 import { Candidate } from './Candidate'
 import { Job } from './Job'
 import { Company } from './Company'
@@ -24,6 +24,9 @@ class JobResponse {
 
   @Column('integer')
   status: TJobResponseValues;
+
+  @CreateDateColumn()
+  created_at: Date;
 
   @ManyToOne(() => Candidate)
   @JoinColumn({ name: 'candidateId' })

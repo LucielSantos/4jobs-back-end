@@ -18,10 +18,12 @@ class JobResponseRepository extends Repository<JobResponse> {
         'jobResponse.id',
         'jobResponse.challengeResolved',
         'jobResponse.status',
+        'jobResponse.created_at',
         'jobs.id',
         'jobs.title',
         'jobs.observations',
         'jobs.deadlineResolve',
+        'jobs.description',
       ])
       .where({ id: jobCandidateId })
       .leftJoin('jobResponse.job', 'jobs')
@@ -35,10 +37,12 @@ class JobResponseRepository extends Repository<JobResponse> {
         'jobResponse.id',
         'jobResponse.challengeResolved',
         'jobResponse.status',
+        'jobResponse.created_at',
         'jobs.id',
         'jobs.title',
         'jobs.observations',
         'jobs.deadlineResolve',
+        'jobs.description',
       ])
       .where({ candidateId })
       .leftJoin('jobResponse.job', 'jobs')
