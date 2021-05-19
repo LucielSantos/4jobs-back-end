@@ -36,7 +36,7 @@ router.post('/jobs', authMiddleware(userType.company), (req, res) => jobControll
 
 router.get('/jobs', authMiddleware(userType.company), (req, res) => jobController.getJobs(req, res))
 
-router.get('/jobs/:jobId/preview', authMiddleware(false), (req, res) => jobController.getPreview(req, res))
+router.get('/jobs/:jobId/preview', (req, res) => jobController.getPreview(req, res))
 
 // Job response routes
 router.post('/jobsResponse/linkCandidateJob', authMiddleware(userType.candidate), (req, res) => jobResponseController.linkCandidateJob(req, res))

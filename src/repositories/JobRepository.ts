@@ -11,6 +11,7 @@ class JobRepository extends Repository<Job> {
     return await this
       .createQueryBuilder('jobs')
       .select([
+        'jobs.id',
         'jobs.title',
         'jobs.deadlineResolve',
         'jobs.description',
@@ -20,6 +21,7 @@ class JobRepository extends Repository<Job> {
         'jobs.title',
         'companies.name',
         'companies.marketSegment',
+        'companies.id',
       ])
       .where({ id: jobId })
       .leftJoin('jobs.company', 'companies')
