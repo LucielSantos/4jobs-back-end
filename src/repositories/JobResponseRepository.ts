@@ -8,7 +8,7 @@ class JobResponseRepository extends Repository<JobResponse> {
   }
 
   async getById(jobCandidateId: string) {
-    return await this.findOne({ id: jobCandidateId })
+    return await this.findOne({ where: { id: jobCandidateId }, relations: ['job'] })
   }
 
   async getSimpleById(jobCandidateId: string) {
