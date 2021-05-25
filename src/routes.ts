@@ -45,7 +45,7 @@ router.get('/jobsResponse/:id', authMiddleware(userType.candidate), (req, res) =
 
 router.get('/jobsResponse', authMiddleware(userType.candidate), (req, res) => jobResponseController.getList(req, res))
 
-router.post('/jobsResponse/replyForm/:jobResponseId', authMiddleware(userType.candidate), (req, res) => jobResponseController.replyForm(req, res))
+router.put('/jobsResponse/replyForm/:jobResponseId', authMiddleware(userType.candidate), (req, res) => jobResponseController.replyForm(req, res))
 
 router.use(errorMiddleware)
 
