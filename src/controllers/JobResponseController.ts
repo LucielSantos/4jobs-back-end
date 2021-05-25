@@ -1,7 +1,8 @@
 import { JobResponseRepository } from '@repositories/JobResponseRepository'
 import { createErrorMessage } from '@utils/'
 import { Request, Response } from 'express'
-import { ILinkCandidateReq } from 'src/dtos/jobResponse'
+import { jobResponseTypes } from 'src/constants'
+import { ILinkCandidateReq, IResponseFormJob } from 'src/dtos/jobResponse'
 import { BaseController } from './BaseController'
 import { JobController } from './JobController'
 
@@ -80,6 +81,39 @@ class JobResponseController extends BaseController<JobResponseRepository> {
     // console.log(jobs)
 
     return res.status(200).json(jobs)
+  }
+
+  async replyForm(req: Request<{ jobResponseId: string }, any, { fields: IResponseFormJob[] }>, res: Response) {
+    console.log(req.body)
+    console.log(req.params.jobResponseId)
+
+    const jobResponseId = req.params.jobResponseId
+    const responses = req.body.fields
+
+    const jobResponse = await this.repository.getById(jobResponseId)
+
+    if (!jobResponse) {
+      return res.status(404).send()
+    }
+
+    if (jobResponse.status === jobResponseTypes.registered) {
+      return res.status(400).send(createErrorMessage({ toastMessage: 'Aguarde a empresa liberar o formulário' }))
+    }
+
+    if (jobResponse.status !== jobResponseTypes.answering && jobResponse.status !== jobResponseTypes.returned) {
+      return res.status(400).send(createErrorMessage({ toastMessage: 'Você já respondeu este formulário, aguarde a avaliação' }))
+    }
+
+    await this.repository.save({
+      id: jobResponseId,
+      response: responses,
+      status: jobResponseTypes.answered,
+      challengeResolved: true,
+    })
+
+    const savedJobResponse = await this.repository.getById(jobResponseId)
+
+    return res.status(200).json(savedJobResponse)
   }
 }
 

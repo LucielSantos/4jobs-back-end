@@ -4,6 +4,7 @@ import { Candidate } from './Candidate'
 import { Job } from './Job'
 import { Company } from './Company'
 import { TJobResponseValues } from 'src/constants'
+import { IResponseFormJob } from 'src/dtos/jobResponse'
 
 @Entity('jobResponse')
 class JobResponse {
@@ -24,6 +25,9 @@ class JobResponse {
 
   @Column('integer')
   status: TJobResponseValues;
+
+  @Column('simple-json')
+  response: IResponseFormJob[];
 
   @CreateDateColumn()
   created_at: Date;

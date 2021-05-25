@@ -18,6 +18,7 @@ class JobResponseRepository extends Repository<JobResponse> {
         'jobResponse.id',
         'jobResponse.challengeResolved',
         'jobResponse.status',
+        'jobResponse.response',
         'jobResponse.created_at',
         'jobs.id',
         'jobs.title',
