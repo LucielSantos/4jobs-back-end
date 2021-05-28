@@ -1,4 +1,5 @@
 import { JobResponse } from '@models/JobResponse'
+import { TJobResponseValues } from 'src/constants'
 import { EntityRepository, Repository } from 'typeorm'
 
 @EntityRepository(JobResponse)
@@ -48,6 +49,14 @@ class JobResponseRepository extends Repository<JobResponse> {
       .where({ candidateId })
       .leftJoin('jobResponse.job', 'jobs')
       .getMany()
+  }
+
+  async getCountByJob(jobId: string) {
+    return await this.count({ where: { jobId } })
+  }
+
+  async getCountByJobAndStatus(jobId: string, status: TJobResponseValues) {
+    return await this.count({ where: { jobId, status } })
   }
 }
 

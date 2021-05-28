@@ -1,9 +1,11 @@
 import { JobRepository } from '@repositories/JobRepository'
 import { createErrorMessage } from '@utils/'
 import { Request, Response } from 'express'
+import { jobResponseTypes, TJobResponseValues } from 'src/constants'
 import { ICreatJob } from 'src/dtos/job'
 import { createJobValidationSchema } from 'src/validationSchemas'
 import { BaseController } from './BaseController'
+import { JobResponseController } from './JobResponseController'
 
 class JobController extends BaseController<JobRepository> {
   constructor() {
@@ -55,7 +57,22 @@ class JobController extends BaseController<JobRepository> {
         },
       })
 
-    return res.status(200).json(jobs)
+    const newJobs = await Promise.all(jobs.map(async job => {
+      const candidates = await this.countCandidates(job.id)
+      const resolved = await this.countCandidates(job.id, jobResponseTypes.answered)
+      const answering = await this.countCandidates(job.id, jobResponseTypes.answering)
+      const inEvaluation = await this.countCandidates(job.id, jobResponseTypes.inEvaluation)
+
+      return ({
+        ...job,
+        candidates,
+        resolved,
+        answering,
+        inEvaluation,
+      })
+    }))
+
+    return res.status(200).json(newJobs)
   }
 
   async getPreview(req: Request<{ jobId: string }>, res: Response) {
@@ -68,6 +85,16 @@ class JobController extends BaseController<JobRepository> {
     }
 
     return res.status(200).json(job)
+  }
+
+  async countCandidates(jobId: string, status?: TJobResponseValues) {
+    const jobResponseController = new JobResponseController()
+
+    if (status) {
+      return jobResponseController.repository.getCountByJobAndStatus(jobId, status)
+    }
+
+    return jobResponseController.repository.getCountByJob(jobId)
   }
 }
 

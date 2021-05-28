@@ -1,4 +1,4 @@
-export type TJobResponseValues = 1 | 2 | 3 | 4;
+export type TJobResponseValues = 1 | 2 | 3 | 4 | 5;
 
 export interface IJobResponseTypes {
   [key: string]: TJobResponseValues;
@@ -9,4 +9,5 @@ export const jobResponseTypes: IJobResponseTypes = {
   answering: 2,
   answered: 3,
   returned: 4,
+  inEvaluation: 5,
 }
