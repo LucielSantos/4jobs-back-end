@@ -96,6 +96,28 @@ class JobController extends BaseController<JobRepository> {
 
     return jobResponseController.repository.getCountByJob(jobId)
   }
+
+  get jobResponseRepository() {
+    return new JobResponseController().repository
+  }
+
+  async getJobCandidates(req: Request<{ jobId: string }>, res: Response) {
+    const { jobId } = req.params
+
+    const registered = await this.jobResponseRepository.getCandidatesByJobAndStatus(jobId, jobResponseTypes.registered)
+    const inEvaluation = await this.jobResponseRepository.getCandidatesByJobAndStatus(jobId, jobResponseTypes.answered)
+    const answering = await this.jobResponseRepository.getCandidatesByJobAndStatus(jobId, jobResponseTypes.answering)
+    const finished = await this.jobResponseRepository.getCandidatesByJobAndStatus(jobId, jobResponseTypes.finished)
+
+    const body = {
+      registered,
+      inEvaluation,
+      answering,
+      finished,
+    }
+
+    return res.status(200).json(body)
+  }
 }
 
 export { JobController }

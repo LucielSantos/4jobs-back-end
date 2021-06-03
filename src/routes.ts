@@ -38,6 +38,8 @@ router.get('/jobs', authMiddleware(userType.company), (req, res) => jobControlle
 
 router.get('/jobs/:jobId/preview', (req, res) => jobController.getPreview(req, res))
 
+router.get('/jobs/:jobId/candidates', (req, res) => jobController.getJobCandidates(req, res))
+
 // Job response routes
 router.post('/jobsResponse/linkCandidateJob', authMiddleware(userType.candidate), (req, res) => jobResponseController.linkCandidateJob(req, res))
 

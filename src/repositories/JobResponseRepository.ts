@@ -58,6 +58,23 @@ class JobResponseRepository extends Repository<JobResponse> {
   async getCountByJobAndStatus(jobId: string, status: TJobResponseValues) {
     return await this.count({ where: { jobId, status } })
   }
+
+  async getCandidatesByJobAndStatus(jobId: string, status: TJobResponseValues) {
+    const list = await this
+      .find({
+        where: { jobId, status },
+        relations: ['candidate'],
+      })
+
+    return list.map(jobResponse => {
+      const candidate = jobResponse.candidate
+
+      delete candidate.created_at
+      delete candidate.password
+
+      return { ...candidate, status: jobResponse.status }
+    })
+  }
 }
 
 export { JobResponseRepository }
