@@ -28,6 +28,8 @@ router.post('/authenticate', (req, res) => authController.authenticate(req, res)
 // Candidate routes
 router.post('/candidate', (req, res) => candidateController.create(req, res))
 
+router.get('/candidate/:id', (req, res) => candidateController.getById(req, res))
+
 // Company routes
 router.post('/company', (req, res) => companyController.create(req, res))
 

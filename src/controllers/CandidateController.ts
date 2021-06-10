@@ -33,6 +33,14 @@ class CandidateController extends BaseController<CandidateRepository> {
 
     return res.status(201).json(company)
   }
+
+  async getById(req: Request<{ id: string }>, res: Response) {
+    const id = req.params.id
+
+    const candidate = await this.repository.getById(id)
+
+    return res.status(200).json(candidate)
+  }
 }
 
 export { CandidateController }
