@@ -2,7 +2,7 @@ import { Candidate } from '@models/Candidate'
 import { CandidateRepository } from '@repositories/CandidateRepository'
 import { createErrorMessage } from '@utils/errors'
 import { Request, Response } from 'express'
-import { ICreateCandidate } from 'src/dtos/candidate'
+import { ICreateCandidate, IEditCandidate } from 'src/dtos/candidate'
 import { createCandidateValidationSchema } from 'src/validationSchemas'
 import { getRepository } from 'typeorm'
 import { BaseController } from './BaseController'
@@ -39,7 +39,22 @@ class CandidateController extends BaseController<CandidateRepository> {
 
     const candidate = await this.repository.getById(id)
 
+    delete candidate.password
+
     return res.status(200).json(candidate)
+  }
+
+  async editById(req: Request<{ id: string }, any, IEditCandidate>, res: Response) {
+    const id = req.params.id
+
+    const candidateToEdit = req.body
+
+    await this.repository.save({
+      id,
+      ...candidateToEdit,
+    })
+
+    return res.status(200).send()
   }
 }
 

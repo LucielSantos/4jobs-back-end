@@ -24,14 +24,14 @@ class Candidate {
   @Column('varchar')
   locality: string;
 
-  @Column('varchar')
-  skills: string;
+  @Column('simple-array')
+  skills: string[];
 
-  @Column('varchar')
-  formations: string;
+  @Column('simple-array')
+  formations: string[];
 
-  @Column('varchar')
-  experiences: string;
+  @Column('simple-array')
+  experiences: string[];
 
   @CreateDateColumn()
   created_at: Date;
