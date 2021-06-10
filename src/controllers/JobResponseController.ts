@@ -1,7 +1,7 @@
 import { JobResponseRepository } from '@repositories/JobResponseRepository'
 import { createErrorMessage } from '@utils/'
 import { Request, Response } from 'express'
-import { jobResponseTypes } from 'src/constants'
+import { jobResponseTypes, TJobResponseValues } from 'src/constants'
 import { ILinkCandidateReq, IResponseFormJob } from 'src/dtos/jobResponse'
 import { BaseController } from './BaseController'
 import { JobController } from './JobController'
@@ -84,9 +84,6 @@ class JobResponseController extends BaseController<JobResponseRepository> {
   }
 
   async replyForm(req: Request<{ jobResponseId: string }, any, { fields: IResponseFormJob[] }>, res: Response) {
-    console.log(req.body)
-    console.log(req.params.jobResponseId)
-
     const jobResponseId = req.params.jobResponseId
     const responses = req.body.fields
 
@@ -114,6 +111,21 @@ class JobResponseController extends BaseController<JobResponseRepository> {
     const savedJobResponse = await this.repository.getById(jobResponseId)
 
     return res.status(200).json(savedJobResponse)
+  }
+
+  async changeStatus(req: Request<{ jobResponseId: string }, any, { newStatus: TJobResponseValues }>, res: Response) {
+    const { jobResponseId } = req.params
+    const { newStatus } = req.body
+
+    const statusArr = Object.keys(jobResponseTypes).map(key => jobResponseTypes[key])
+
+    if (statusArr.indexOf(newStatus) < 0) {
+      return res.status(400).json(createErrorMessage({ toastMessage: 'Este status não existe' }))
+    }
+
+    await this.repository.changeStatus(jobResponseId, newStatus)
+
+    return res.status(200).send()
   }
 }
 

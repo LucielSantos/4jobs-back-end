@@ -72,7 +72,14 @@ class JobResponseRepository extends Repository<JobResponse> {
       delete candidate.created_at
       delete candidate.password
 
-      return { ...candidate, status: jobResponse.status }
+      return { ...candidate, status: jobResponse.status, jobResponseId: jobResponse.id }
+    })
+  }
+
+  async changeStatus(jobResponseId: string, newStatus: TJobResponseValues) {
+    return this.save({
+      id: jobResponseId,
+      status: newStatus,
     })
   }
 }

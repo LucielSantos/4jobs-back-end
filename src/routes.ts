@@ -49,6 +49,8 @@ router.get('/jobsResponse', authMiddleware(userType.candidate), (req, res) => jo
 
 router.put('/jobsResponse/replyForm/:jobResponseId', authMiddleware(userType.candidate), (req, res) => jobResponseController.replyForm(req, res))
 
+router.patch('/jobsResponse/:jobResponseId/changeStatus', authMiddleware(userType.company), (req, res) => jobResponseController.changeStatus(req, res))
+
 router.use(errorMiddleware)
 
 export { router }
