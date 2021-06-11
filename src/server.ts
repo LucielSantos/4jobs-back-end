@@ -1,7 +1,8 @@
 import 'reflect-metadata'
 
-import express, { NextFunction, Request, Response } from 'express'
+import express from 'express'
 import cors from 'cors'
+
 import './database'
 import { router } from './routes'
 
