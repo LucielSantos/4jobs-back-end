@@ -7,21 +7,19 @@ import { router } from './routes'
 
 const app = express()
 
-const allowCrossDomain = function (req: Request, res: Response, next: NextFunction) {
+app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Credentials', 'true')
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With')
+  res.header('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json')
+  next()
+})
 
-  // intercept OPTIONS method
-  // eslint-disable-next-line
-  if (req.method == 'OPTIONS') {
-    res.send(200)
-  } else {
-    next()
-  }
-}
-
-app.use(allowCrossDomain)
+app.all('*', function (req, res) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Content-Length, Authorization, Accept,X-Requested-With')
+  res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
+})
 
 // app.use(cors())
 
