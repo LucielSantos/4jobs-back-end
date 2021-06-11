@@ -1,6 +1,7 @@
-import { JobResponse } from '@models/JobResponse'
-import { TJobResponseValues } from 'src/constants'
 import { EntityRepository, Repository } from 'typeorm'
+
+import { JobResponse } from '../models/JobResponse'
+import { TJobResponseValues } from '../constants'
 
 @EntityRepository(JobResponse)
 class JobResponseRepository extends Repository<JobResponse> {

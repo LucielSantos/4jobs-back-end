@@ -1,12 +1,13 @@
-import { createErrorMessage } from '@utils/errors'
 import { Request, Response } from 'express'
 
-import { IAuthenticate } from 'src/dtos/auth'
+import { createErrorMessage } from '../utils/errors'
+
+import { IAuthenticate } from '../dtos/auth'
 import { CandidateController } from './CandidateController'
 import { CompanyController } from './CompanyController'
 
-import { userType } from 'src/constants/user'
-import { generateToken } from '@utils/'
+import { userType } from '../constants/user'
+import { generateToken } from '../utils'
 
 class AuthController {
   async authenticate(req: Request, res: Response) {

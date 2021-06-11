@@ -3,8 +3,8 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn 
 import { Candidate } from './Candidate'
 import { Job } from './Job'
 import { Company } from './Company'
-import { TJobResponseValues } from 'src/constants'
-import { IResponseFormJob } from 'src/dtos/jobResponse'
+import { TJobResponseValues } from '../constants'
+import { IResponseFormJob } from '../dtos/jobResponse'
 
 @Entity('jobResponse')
 class JobResponse {

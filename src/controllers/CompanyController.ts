@@ -1,8 +1,9 @@
-import { CompaniesRepository } from '@repositories/CompaniesRepository'
-import { createErrorMessage } from '@utils/errors'
 import { Request, Response } from 'express'
-import { ICreateCompany } from 'src/dtos/company'
-import { createCompanyValidationSchema } from 'src/validationSchemas'
+
+import { CompaniesRepository } from '../repositories/CompaniesRepository'
+import { createErrorMessage } from '../utils/errors'
+import { ICreateCompany } from '../dtos/company'
+import { createCompanyValidationSchema } from '../validationSchemas'
 import { BaseController } from './BaseController'
 
 class CompanyController extends BaseController<CompaniesRepository> {

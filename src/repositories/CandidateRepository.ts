@@ -1,5 +1,6 @@
-import { Candidate } from '@models/Candidate'
 import { EntityRepository, Repository } from 'typeorm'
+
+import { Candidate } from '../models/Candidate'
 
 @EntityRepository(Candidate)
 class CandidateRepository extends Repository<Candidate> {

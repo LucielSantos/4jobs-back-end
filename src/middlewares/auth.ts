@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-import { createErrorMessage, ITokenPayload } from '@utils/'
+import { createErrorMessage, ITokenPayload } from '../utils'
 import { TUserTypeNum } from '../constants'
 import authConfig from '../config/auth.json'
 

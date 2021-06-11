@@ -1,8 +1,9 @@
-import { JobResponseRepository } from '@repositories/JobResponseRepository'
-import { createErrorMessage } from '@utils/'
 import { Request, Response } from 'express'
-import { jobResponseTypes, TJobResponseValues } from 'src/constants'
-import { ILinkCandidateReq, IResponseFormJob } from 'src/dtos/jobResponse'
+
+import { JobResponseRepository } from '../repositories/JobResponseRepository'
+import { createErrorMessage } from '../utils/'
+import { jobResponseTypes, TJobResponseValues } from '../constants'
+import { ILinkCandidateReq, IResponseFormJob } from '../dtos/jobResponse'
 import { BaseController } from './BaseController'
 import { JobController } from './JobController'
 

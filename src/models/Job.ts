@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
-import { IDynamicFormField } from 'src/dtos/job'
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryColumn } from 'typeorm'
+import { IDynamicFormField } from '../dtos/job'
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 import { Company } from './Company'
 
 @Entity('jobs')

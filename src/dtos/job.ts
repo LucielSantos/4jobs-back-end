@@ -1,4 +1,4 @@
-import { TDynamicFormValue } from 'src/constants'
+import { TDynamicFormValue } from '../constants'
 
 export interface IDynamicFormField {
   title: string;

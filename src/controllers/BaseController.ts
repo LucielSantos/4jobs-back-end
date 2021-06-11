@@ -1,7 +1,8 @@
-import { createErrorMessage } from '@utils/errors'
 import { Response } from 'express'
 import { getCustomRepository, ObjectType } from 'typeorm'
 import * as Yup from 'yup'
+
+import { createErrorMessage } from '../utils/errors'
 
 type TValidationSchema = Yup.AnyObjectSchema;
 

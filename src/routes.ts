@@ -3,12 +3,12 @@ import { Router } from 'express'
 import { authMiddleware } from './middlewares/auth'
 import { errorMiddleware } from './utils/errorMiddleware'
 
-import { AuthController } from '@controllers/AuthController'
-import { CandidateController } from '@controllers/CandidateController'
-import { CompanyController } from '@controllers/CompanyController'
-import { JobController } from '@controllers/JobController'
+import { AuthController } from './controllers/AuthController'
+import { CandidateController } from './controllers/CandidateController'
+import { CompanyController } from './controllers/CompanyController'
+import { JobController } from './controllers/JobController'
 import { userType } from './constants/user'
-import { JobResponseController } from '@controllers/JobResponseController'
+import { JobResponseController } from './controllers/JobResponseController'
 
 const router = Router()
 

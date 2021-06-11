@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
-import { TUserTypeNum } from 'src/constants'
 
+import { TUserTypeNum } from '../constants'
 import authConfig from '../config/auth.json'
 
 export interface ITokenPayload {

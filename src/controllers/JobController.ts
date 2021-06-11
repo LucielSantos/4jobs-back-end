@@ -1,9 +1,10 @@
-import { JobRepository } from '@repositories/JobRepository'
-import { createErrorMessage } from '@utils/'
 import { Request, Response } from 'express'
-import { jobResponseTypes, TJobResponseValues } from 'src/constants'
-import { ICreatJob } from 'src/dtos/job'
-import { createJobValidationSchema } from 'src/validationSchemas'
+
+import { JobRepository } from '../repositories/JobRepository'
+import { createErrorMessage } from '../utils/'
+import { jobResponseTypes, TJobResponseValues } from '../constants'
+import { ICreatJob } from '../dtos/job'
+import { createJobValidationSchema } from '../validationSchemas'
 import { BaseController } from './BaseController'
 import { JobResponseController } from './JobResponseController'
 

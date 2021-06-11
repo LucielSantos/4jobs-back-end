@@ -1,10 +1,9 @@
-import { Candidate } from '@models/Candidate'
-import { CandidateRepository } from '@repositories/CandidateRepository'
-import { createErrorMessage } from '@utils/errors'
 import { Request, Response } from 'express'
-import { ICreateCandidate, IEditCandidate } from 'src/dtos/candidate'
-import { createCandidateValidationSchema } from 'src/validationSchemas'
-import { getRepository } from 'typeorm'
+
+import { CandidateRepository } from '../repositories/CandidateRepository'
+import { createErrorMessage } from '../utils/errors'
+import { ICreateCandidate, IEditCandidate } from '../dtos/candidate'
+import { createCandidateValidationSchema } from '../validationSchemas'
 import { BaseController } from './BaseController'
 
 class CandidateController extends BaseController<CandidateRepository> {
