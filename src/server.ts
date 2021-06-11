@@ -23,7 +23,7 @@ const allowCrossDomain = function (req: Request, res: Response, next: NextFuncti
 
 app.use(allowCrossDomain)
 
-app.use(cors())
+// app.use(cors())
 
 app.use(express.json({ limit: '100mb' }))
 
