@@ -30,6 +30,9 @@ class Job {
   @Column('varchar')
   observations: string;
 
+  @Column('varchar')
+  observationsAfterEvaluation: string;
+
   @Column('simple-array')
   tags: string[];
 

@@ -37,6 +37,10 @@ export class CreateJob1620435106567 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'observationsAfterEvaluation',
+            type: 'varchar',
+          },
+          {
             name: 'tags',
             type: 'text',
           },
