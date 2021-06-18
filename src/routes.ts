@@ -56,6 +56,8 @@ router.patch('/jobsResponse/:jobResponseId/changeStatus', authMiddleware(userTyp
 
 router.get('/jobsResponse/:jobResponseId/messages', authMiddleware(false), (req, res) => jobResponseController.getMessages(req, res))
 
+router.put('/jobsResponse/:jobResponseId/messages', authMiddleware(false), (req, res) => jobResponseController.addNewMessage(req, res))
+
 router.use(errorMiddleware)
 
 export { router }

@@ -3,7 +3,7 @@ import { Request, Response } from 'express'
 import { JobResponseRepository } from '../repositories/JobResponseRepository'
 import { createErrorMessage } from '../utils/'
 import { jobResponseMessageByStatus, jobResponseTypes, TJobResponseValues } from '../constants'
-import { ILinkCandidateReq, IResponseFormJob } from '../dtos/jobResponse'
+import { ILinkCandidateReq, INewMessageReq, IResponseFormJob } from '../dtos/jobResponse'
 import { BaseController } from './BaseController'
 import { JobController } from './JobController'
 
@@ -137,6 +137,17 @@ class JobResponseController extends BaseController<JobResponseRepository> {
     const messages = await this.repository.getMessages(jobResponseId)
 
     return res.status(200).json({ messages: messages || [] })
+  }
+
+  async addNewMessage(req: Request<{ jobResponseId: string }, any, INewMessageReq>, res: Response) {
+    const userId = res.locals.userId as string
+    const { jobResponseId } = req.params
+
+    const { message } = req.body
+
+    await this.repository.addMessage(jobResponseId, userId, message)
+
+    return res.status(200).send()
   }
 }
 

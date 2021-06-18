@@ -13,3 +13,7 @@ export interface IMessageJobResponse {
   message: string;
   date: string;
 }
+
+export interface INewMessageReq {
+  message: string;
+}
