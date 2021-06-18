@@ -12,3 +12,12 @@ export const jobResponseTypes: IJobResponseTypes = {
   inEvaluation: 5,
   finished: 6,
 }
+
+export const jobResponseMessageByStatus = {
+  [jobResponseTypes.registered]: 'Você se candidatou ao desafio, aguarde a pré-avaliação.',
+  [jobResponseTypes.answering]: 'Você já pode responder ao desafio!',
+  [jobResponseTypes.answered]: 'Aguarde a avaliação do desafio.',
+  [jobResponseTypes.returned]: 'Seu desafio foi retornado, poderá responder novamente.',
+  [jobResponseTypes.inEvaluation]: 'Seu desafio está em avaliação no momento, aguarde.',
+  [jobResponseTypes.finished]: 'O processo de recrutamento acabou!',
+}

@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 
 import { JobResponseRepository } from '../repositories/JobResponseRepository'
 import { createErrorMessage } from '../utils/'
-import { jobResponseTypes, TJobResponseValues } from '../constants'
+import { jobResponseMessageByStatus, jobResponseTypes, TJobResponseValues } from '../constants'
 import { ILinkCandidateReq, IResponseFormJob } from '../dtos/jobResponse'
 import { BaseController } from './BaseController'
 import { JobController } from './JobController'
@@ -55,6 +55,8 @@ class JobResponseController extends BaseController<JobResponseRepository> {
       const saveData = await this.repository.create(data)
 
       await this.repository.save(saveData)
+
+      await this.repository.addMessage(saveData.id, companyId, jobResponseMessageByStatus[`${saveData.status || 1}`])
 
       const jobCreated = await this.repository.getSimpleById(saveData.id)
 

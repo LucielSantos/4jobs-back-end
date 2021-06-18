@@ -41,6 +41,11 @@ export class CreateJobResponseTable1621199217378 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: 'messages',
+            type: 'text',
+            isNullable: true,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
