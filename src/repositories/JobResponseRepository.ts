@@ -89,7 +89,11 @@ class JobResponseRepository extends Repository<JobResponse> {
   async getMessages(jobResponseId: string) {
     const jobResponse = await this.findOne({ where: { id: jobResponseId } })
 
-    return jobResponse.messages
+    if (jobResponse) {
+      return jobResponse.messages
+    } else {
+      return false
+    }
   }
 
   async addMessage(jobResponseId: string, authorId: string, message: string) {
