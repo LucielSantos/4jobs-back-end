@@ -119,12 +119,15 @@ class JobResponseController extends BaseController<JobResponseRepository> {
   async changeStatus(req: Request<{ jobResponseId: string }, any, { newStatus: TJobResponseValues }>, res: Response) {
     const { jobResponseId } = req.params
     const { newStatus } = req.body
+    const companyId = res.locals.userId as string
 
     const statusArr = Object.keys(jobResponseTypes).map(key => jobResponseTypes[key])
 
     if (statusArr.indexOf(newStatus) < 0) {
       return res.status(400).json(createErrorMessage({ toastMessage: 'Este status não existe' }))
     }
+
+    await this.repository.addMessage(jobResponseId, companyId, jobResponseMessageByStatus[newStatus])
 
     await this.repository.changeStatus(jobResponseId, newStatus)
 
