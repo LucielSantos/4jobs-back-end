@@ -1,3 +1,4 @@
+import { TJobStatus } from 'src/dtos/job'
 import { EntityRepository, Repository } from 'typeorm'
 
 import { Job } from '../models/Job'
@@ -35,6 +36,13 @@ class JobRepository extends Repository<Job> {
 
   async verifyIfJobExistsByCompany(jobId: string, companyId: string) {
     return Boolean(await this.findOne({ id: jobId, companyId }))
+  }
+
+  async changeStatus(jobId: string, newStatus: TJobStatus) {
+    return await this.save({
+      id: jobId,
+      status: newStatus,
+    })
   }
 }
 

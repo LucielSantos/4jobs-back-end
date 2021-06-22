@@ -33,6 +33,9 @@ class Job {
   @Column('varchar')
   observationsAfterEvaluation: string;
 
+  @Column('integer')
+  status: number;
+
   @Column('simple-array')
   tags: string[];
 

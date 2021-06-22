@@ -3,7 +3,7 @@ import { Request, Response } from 'express'
 import { JobRepository } from '../repositories/JobRepository'
 import { createErrorMessage } from '../utils/'
 import { jobResponseTypes, TJobResponseValues } from '../constants'
-import { ICreatJob } from '../dtos/job'
+import { ICreatJob, TJobStatus } from '../dtos/job'
 import { createJobValidationSchema } from '../validationSchemas'
 import { BaseController } from './BaseController'
 import { JobResponseController } from './JobResponseController'
@@ -131,6 +131,24 @@ class JobController extends BaseController<JobRepository> {
     }
 
     return res.status(200).json(body)
+  }
+
+  async changeStatus(req: Request<{ jobId: string }, any, { newStatus: TJobStatus }>, res: Response) {
+    const id = req.params.jobId
+    const newStatus = req.body.newStatus
+
+    if (!id) return res.status(404).send
+
+    const job = this.repository.getById(id)
+
+    if (!job) return res.status(404).send
+
+    console.log(id)
+    console.log(newStatus)
+
+    await this.repository.changeStatus(id, newStatus)
+
+    return res.status(200).json({ newStatus })
   }
 }
 

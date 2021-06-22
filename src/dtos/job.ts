@@ -16,3 +16,5 @@ export interface ICreatJob {
   tags: string[];
   fields: IDynamicFormField[];
 }
+
+export type TJobStatus = 1 | 2;
