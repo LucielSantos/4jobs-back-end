@@ -39,6 +39,8 @@ router.post('/jobs', authMiddleware(userType.company), (req, res) => jobControll
 
 router.get('/jobs', authMiddleware(userType.company), (req, res) => jobController.getJobs(req, res))
 
+router.get('/jobs/:id', authMiddleware(userType.company), (req, res) => jobController.getById(req, res))
+
 router.get('/jobs/:jobId/preview', (req, res) => jobController.getPreview(req, res))
 
 router.get('/jobs/:jobId/candidates', (req, res) => jobController.getJobCandidates(req, res))
@@ -46,7 +48,7 @@ router.get('/jobs/:jobId/candidates', (req, res) => jobController.getJobCandidat
 // Job response routes
 router.post('/jobsResponse/linkCandidateJob', authMiddleware(userType.candidate), (req, res) => jobResponseController.linkCandidateJob(req, res))
 
-router.get('/jobsResponse/:id', authMiddleware(userType.candidate), (req, res) => jobResponseController.getById(req, res))
+router.get('/jobsResponse/:id', authMiddleware(false), (req, res) => jobResponseController.getById(req, res))
 
 router.get('/jobsResponse', authMiddleware(userType.candidate), (req, res) => jobResponseController.getList(req, res))
 
@@ -57,6 +59,8 @@ router.patch('/jobsResponse/:jobResponseId/changeStatus', authMiddleware(userTyp
 router.get('/jobsResponse/:jobResponseId/messages', authMiddleware(false), (req, res) => jobResponseController.getMessages(req, res))
 
 router.put('/jobsResponse/:jobResponseId/messages', authMiddleware(false), (req, res) => jobResponseController.addNewMessage(req, res))
+
+router.get('/jobsResponse/:jobResponseId/responses', authMiddleware(false), (req, res) => jobResponseController.getJobResponses(req, res))
 
 router.use(errorMiddleware)
 

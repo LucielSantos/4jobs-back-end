@@ -34,6 +34,18 @@ class JobController extends BaseController<JobRepository> {
     }
   }
 
+  async getById(req: Request<{ id: string }>, res: Response) {
+    const jobId = req.params.id
+
+    const job = await this.repository.getById(jobId)
+
+    if (!job) {
+      return res.status(404).send()
+    }
+
+    return res.status(200).json(job)
+  }
+
   async executeCreation(data: ICreatJob, companyId: string, res: Response) {
     const jobToSave = { ...data, companyId }
 
@@ -106,14 +118,15 @@ class JobController extends BaseController<JobRepository> {
     const { jobId } = req.params
 
     const registered = await this.jobResponseRepository.getCandidatesByJobAndStatus(jobId, jobResponseTypes.registered)
-    const inEvaluation = await this.jobResponseRepository.getCandidatesByJobAndStatus(jobId, jobResponseTypes.answered)
+    const answered = await this.jobResponseRepository.getCandidatesByJobAndStatus(jobId, jobResponseTypes.answered)
+    const inEvaluation = await this.jobResponseRepository.getCandidatesByJobAndStatus(jobId, jobResponseTypes.inEvaluation)
     const answering = await this.jobResponseRepository.getCandidatesByJobAndStatus(jobId, jobResponseTypes.answering)
     const finished = await this.jobResponseRepository.getCandidatesByJobAndStatus(jobId, jobResponseTypes.finished)
 
     const body = {
       registered,
       inEvaluation,
-      answering,
+      answering: [...answering, ...answered],
       finished,
     }
 

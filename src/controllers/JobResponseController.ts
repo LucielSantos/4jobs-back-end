@@ -152,6 +152,14 @@ class JobResponseController extends BaseController<JobResponseRepository> {
 
     return res.status(200).send()
   }
+
+  async getJobResponses(req: Request<{ jobResponseId: string }>, res: Response) {
+    const { jobResponseId } = req.params
+
+    const responses = await this.repository.getResponsesById(jobResponseId)
+
+    return res.status(200).json(responses)
+  }
 }
 
 export { JobResponseController }

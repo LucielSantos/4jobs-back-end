@@ -8,6 +8,10 @@ class JobRepository extends Repository<Job> {
     return Boolean(await this.findOne({ title, companyId }))
   }
 
+  async getById(jobId: string) {
+    return await this.findOne({ id: jobId })
+  }
+
   async getPreview(jobId: string) {
     return await this
       .createQueryBuilder('jobs')
