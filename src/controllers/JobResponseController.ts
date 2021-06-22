@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 
 import { JobResponseRepository } from '../repositories/JobResponseRepository'
 import { createErrorMessage } from '../utils/'
-import { jobResponseMessageByStatus, jobResponseTypes, TJobResponseValues } from '../constants'
+import { jobResponseMessageByStatus, jobResponseTypes, jobStatus, TJobResponseValues } from '../constants'
 import { ILinkCandidateReq, INewMessageReq, IResponseFormJob } from '../dtos/jobResponse'
 import { BaseController } from './BaseController'
 import { JobController } from './JobController'
@@ -33,6 +33,14 @@ class JobResponseController extends BaseController<JobResponseRepository> {
 
     if (!await jobController.repository.verifyIfJobExistsByCompany(jobId, companyId)) {
       res.status(400).json(createErrorMessage({ toastMessage: 'this job does not belong to the company indicated' }))
+      return false
+    }
+
+    const job = await jobController.repository.getById(jobId)
+
+    if (job.status === jobStatus.closed) {
+      res.status(400).json(createErrorMessage({ toastMessage: 'As inscrições para esta vaga estão canceladas' }))
+
       return false
     }
 
