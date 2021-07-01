@@ -32,6 +32,12 @@ class JobResponse {
   @Column('simple-json')
   messages: IMessageJobResponse[];
 
+  @Column('boolean', { default: false })
+  hasCompanyMessage: boolean;
+
+  @Column('boolean', { default: false })
+  hasCandidateMessage: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 

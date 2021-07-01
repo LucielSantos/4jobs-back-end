@@ -46,6 +46,8 @@ class JobResponseRepository extends Repository<JobResponse> {
         'jobResponse.id',
         'jobResponse.challengeResolved',
         'jobResponse.status',
+        'jobResponse.hasCompanyMessage',
+        'jobResponse.hasCandidateMessage',
         'jobResponse.created_at',
         'jobs.id',
         'jobs.title',
@@ -79,7 +81,13 @@ class JobResponseRepository extends Repository<JobResponse> {
       delete candidate.created_at
       delete candidate.password
 
-      return { ...candidate, status: jobResponse.status, jobResponseId: jobResponse.id }
+      return {
+        ...candidate,
+        status: jobResponse.status,
+        jobResponseId: jobResponse.id,
+        hasCandidateMessage: jobResponse.hasCandidateMessage,
+        hasCompanyMessage: jobResponse.hasCompanyMessage,
+      }
     })
   }
 
