@@ -26,6 +26,7 @@ export const authMiddleware = (userType: TUserTypeNum | false) => (req: Request,
     if (userType && decoded.userType !== userType) { return res.status(401).send(createErrorMessage({ toastMessage: 'Usuário não pode executar esta ação' })) }
 
     res.locals.userId = decoded.id
+    res.locals.userType = decoded.userType
 
     return next()
   })

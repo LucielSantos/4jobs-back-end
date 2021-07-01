@@ -1,7 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm'
 
 import { JobResponse } from '../models/JobResponse'
-import { TJobResponseValues } from '../constants'
+import { TJobResponseValues, TUserTypeNum, userType as userTypeNum } from '../constants'
 import { CandidateController } from '@controllers/CandidateController'
 import { CompanyController } from '@controllers/CompanyController'
 
@@ -98,7 +98,21 @@ class JobResponseRepository extends Repository<JobResponse> {
     })
   }
 
-  async getMessages(jobResponseId: string) {
+  async getMessages(jobResponseId: string, userType: TUserTypeNum) {
+    if (userType === userTypeNum.candidate) {
+      await this.save({
+        id: jobResponseId,
+        hasCompanyMessage: false,
+      })
+    }
+
+    if (userType === userTypeNum.company) {
+      await this.save({
+        id: jobResponseId,
+        hasCandidateMessage: false,
+      })
+    }
+
     const jobResponse = await this.findOne({ where: { id: jobResponseId } })
 
     if (jobResponse) {
@@ -128,6 +142,7 @@ class JobResponseRepository extends Repository<JobResponse> {
       return await this.save({
         id: jobResponseId,
         messages: messages ? [...messages, newMessage] : [newMessage],
+        hasCandidateMessage: true,
       })
     }
 
@@ -139,6 +154,7 @@ class JobResponseRepository extends Repository<JobResponse> {
       return await this.save({
         id: jobResponseId,
         messages: messages ? [...messages, newMessage] : [newMessage],
+        hasCompanyMessage: true,
       })
     }
 
